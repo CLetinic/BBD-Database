@@ -11,19 +11,24 @@ VALUES	('Grade 1'),
 		('Grade 10'),
 		('Grade 11'),
 		('Grade 12');
+GO
 
 INSERT INTO SchoolType([Description])
 VALUES  ('Primary School'), ('Secondary School'),('Combined School'), ('Intermediate School');
+GO
 
 INSERT INTO [Gender]([Description])
 VALUES ('Male'), ('Female');
+GO
 
 
 INSERT INTO [dbo].[EntityType]([Description])
-VALUES ('Country') , ('Province'), ('School')
+VALUES ('Country') , ('Province'), ('School');
+GO
 
 INSERT INTO [Entity]([Name] ,[EntityTypeId],[ParentEntityId])
-VALUES ('South Africa',1,null)
+VALUES ('South Africa',1,null);
+GO
 
 
 INSERT INTO [Entity]([Name] ,[EntityTypeId],[ParentEntityId])
@@ -35,7 +40,8 @@ VALUES	('Gauteng',2,1),
 		('Free State',2,1),
 		('Mpumalanga',2,1),
 		('Kwazulu-Natal',2,1),
-		('North West',2,1)
+		('North West',2,1);
+GO
 
 INSERT INTO [Subject] ([Description],GradeId)
 VALUES	('Afrikaans First Additional Language',1),
@@ -185,6 +191,7 @@ VALUES	('Afrikaans First Additional Language',1),
 ('Mathematics',12),
 ('Physical Sciences',12),
 ('Tourism',12);
+GO
 
 
 

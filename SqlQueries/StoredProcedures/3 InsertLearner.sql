@@ -8,7 +8,9 @@ GO
 -- Description:	<Insert a learner into the learner table>
 -- Example: EXEC InsertLearner 'Susan','van Zyl',2,'1996-11-22','9611221110088', 1, '2018-01-01'
 -- =============================================
-ALTER PROCEDURE dbo.[InsertLearner] 
+
+--ALTER PROCEDURE dbo.[InsertLearner] 
+CREATE PROCEDURE dbo.[InsertLearner]
 	@FirstName varchar(100),
 	@LastName varchar(100),
 	@GenderId int,

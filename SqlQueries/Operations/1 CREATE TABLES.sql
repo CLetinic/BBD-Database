@@ -1,8 +1,21 @@
+USE master;
+GO
+
+-- DROP DATABASE GradDB;
+-- GO
+
+ CREATE DATABASE GradDB;
+ GO
+
+USE [GradDB]
+GO
+
 CREATE TABLE [Grade] (
   [GradeId] int NOT NULL IDENTITY,
   [Description] varchar(55),
   PRIMARY KEY ([GradeId])
 );
+GO
 
 CREATE TABLE [YearTerm] (
   [YearTermId] int NOT NULL IDENTITY,
@@ -12,12 +25,14 @@ CREATE TABLE [YearTerm] (
   [EndDate] date,
   PRIMARY KEY ([YearTermId])
 );
+GO
 
 CREATE TABLE [Reason] (
   [ReasonId] int NOT NULL IDENTITY,
   [Description] varchar(55),
   PRIMARY KEY ([ReasonId])
 );
+GO
 
 CREATE TABLE [Subject] (
   [SubjectId] int NOT NULL IDENTITY,
@@ -27,20 +42,21 @@ CREATE TABLE [Subject] (
   PRIMARY KEY ([SubjectId]),
   FOREIGN KEY ([GradeId]) REFERENCES Grade([GradeId])
 );
-
+GO
 
 CREATE TABLE [Gender] (
   [GenderId] int NOT NULL IDENTITY,
   [Description] varchar(55),
   PRIMARY KEY ([GenderId])
 );
+GO
 
 CREATE TABLE [EntityType] (
   [EntityTypeId] int NOT NULL IDENTITY,
   [Description] varchar(55),
   PRIMARY KEY ([EntityTypeId])
 );
-
+GO
 
 CREATE TABLE [Entity] (
   [EntityId] int NOT NULL IDENTITY,
@@ -51,12 +67,14 @@ CREATE TABLE [Entity] (
   FOREIGN KEY ([ParentEntityId]) REFERENCES Entity([EntityId]),
   FOREIGN KEY ([EntityTypeId]) REFERENCES EntityType([EntityTypeId])
 );
+GO
 
 CREATE TABLE [SchoolType] (
   [SchoolTypeId] int NOT NULL IDENTITY,
   [Description] varchar(55),
   PRIMARY KEY ([SchoolTypeId])
 );
+GO
 
 CREATE TABLE [School] (
   [SchoolId] int NOT NULL IDENTITY,
@@ -66,6 +84,7 @@ CREATE TABLE [School] (
   FOREIGN KEY ([EntityId]) REFERENCES Entity([EntityId]),
   FOREIGN KEY ([SchoolTypeId]) REFERENCES [SchoolType]([SchoolTypeId])
 );
+GO
 
 CREATE TABLE [Educator] (
   [EducatorId] int NOT NULL IDENTITY,
@@ -77,6 +96,7 @@ CREATE TABLE [Educator] (
   PRIMARY KEY ([EducatorId]),
   FOREIGN KEY ([GenderId]) REFERENCES Gender([GenderId])
 );
+GO
 
 CREATE TABLE [Learner] (
   [LearnerId] int NOT NULL IDENTITY,
@@ -88,6 +108,7 @@ CREATE TABLE [Learner] (
   PRIMARY KEY ([LearnerId]),
   FOREIGN KEY ([GenderId]) REFERENCES Gender([GenderId])
 );
+GO
 
 CREATE TABLE [LearnerSchool] (
   [LearnerSchoolId]  int NOT NULL IDENTITY,
@@ -99,7 +120,7 @@ CREATE TABLE [LearnerSchool] (
   FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId]),
   FOREIGN KEY ([SchoolId]) REFERENCES School([SchoolId])
 );
-
+GO
 
 CREATE TABLE [EducatorSchool] (
   [EducatorSchoolId]  int NOT NULL IDENTITY,
@@ -111,7 +132,7 @@ CREATE TABLE [EducatorSchool] (
   FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
   FOREIGN KEY ([SchoolId]) REFERENCES School([SchoolId])
 );
-
+GO
 
 CREATE TABLE [EducatorAbsent] (
   [EducatorAbsentId]  int NOT NULL IDENTITY,
@@ -122,6 +143,7 @@ CREATE TABLE [EducatorAbsent] (
   FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
   FOREIGN KEY ([ReasonId]) REFERENCES Reason([ReasonId]),
 );
+GO
 
 CREATE TABLE [EducatorSubject] (
   [EducatorSubjectId]  int NOT NULL IDENTITY,
@@ -133,6 +155,7 @@ CREATE TABLE [EducatorSubject] (
   FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
   FOREIGN KEY ([SubjectId]) REFERENCES [Subject]([SubjectId])
 );
+GO
 
 CREATE TABLE [LearnerSubject] (
   [LearnerSubjectId]  int NOT NULL IDENTITY,
@@ -144,6 +167,7 @@ CREATE TABLE [LearnerSubject] (
   FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId]),
   FOREIGN KEY ([SubjectId]) REFERENCES [Subject]([SubjectId])
 );
+GO
 
 CREATE TABLE [LearnerAbsent] (
   [LearnerAbsentId]  int NOT NULL IDENTITY,
@@ -152,6 +176,7 @@ CREATE TABLE [LearnerAbsent] (
   PRIMARY KEY ([LearnerAbsentId]),
   FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId])
 );
+GO
 
 CREATE TABLE [LearnerSubjectMark] (
   [LearnerSubjectMarkId]  int NOT NULL IDENTITY,
@@ -164,3 +189,4 @@ CREATE TABLE [LearnerSubjectMark] (
   FOREIGN KEY ([LearnerSubjectId]) REFERENCES LearnerSubject([LearnerSubjectId]),
   FOREIGN KEY ([YearTermId]) REFERENCES YearTerm([YearTermId])
 );
+GO
