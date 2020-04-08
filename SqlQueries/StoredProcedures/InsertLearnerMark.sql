@@ -13,21 +13,20 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- EXEC InsertLearnerMark 1 , 80 , '2018-03-27'
--- =============================================
+-- ====================================================================
+-- Author:		Susan van Zyl
+-- Create date: 2020-04-08
+-- Description:	Insert a mark for a learner with registered subject 
+-- Use (Ex) : EXEC InsertLearnerMark 1,58,'2018-02-31'
+-- ====================================================================
 CREATE PROCEDURE InsertLearnerMark 
-	-- Add the parameters for the stored procedure here
+
 	@LearnerSubjectId int,
 	@Percentage decimal(8,2),
 	@Rundate date null
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
+
 	SET NOCOUNT ON
 
 	DECLARE @YearTermId int

@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE createAllTables
+ALTER PROCEDURE createAllTables
 
 AS
 BEGIN
@@ -49,6 +49,7 @@ BEGIN
 		  [SubjectId] int NOT NULL IDENTITY,
 		  [GradeId] int,
 		  [Description] varchar(55),
+		  [Required] bit,
 		  [PassPercentage] decimal(8,2),
 		  PRIMARY KEY ([SubjectId]),
 		  FOREIGN KEY ([GradeId]) REFERENCES Grade([GradeId])
@@ -188,8 +189,6 @@ BEGIN
 		  [LearnerSubjectId] int,
 		  [YearTermId] int,
 		  [Percentage] decimal(8,2),
-		  [EffectiveFrom] date,
-		  [EffectiveTo] date,
 		  PRIMARY KEY ([LearnerSubjectMarkId]),
 		  FOREIGN KEY ([LearnerSubjectId]) REFERENCES LearnerSubject([LearnerSubjectId]),
 		  FOREIGN KEY ([YearTermId]) REFERENCES YearTerm([YearTermId])

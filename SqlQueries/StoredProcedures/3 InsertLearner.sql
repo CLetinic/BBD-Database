@@ -19,8 +19,7 @@ CREATE PROCEDURE dbo.[InsertLearner]
 	@EffectiveFrom date = null
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
+
 	SET NOCOUNT ON;
 
 	IF @EffectiveFrom IS NULL
@@ -28,7 +27,6 @@ BEGIN
 		SET @EffectiveFrom = GETDATE()
 	END
 
-    -- Insert statements for procedure here
 	INSERT INTO [dbo].[Learner] ([FirstName],[LastName],[IDNumber],[BirthDate],[GenderId])
 	VALUES (@FirstName,@LastName, @IdNumber, @BirthDate, @GenderId)
 
