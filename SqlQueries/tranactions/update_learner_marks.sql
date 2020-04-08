@@ -16,14 +16,21 @@ CREATE PROCEDURE dbo.[updateUserGrade] @learnerId int,
                                        @percentage int
 AS
 BEGIN
-    DECLARE
-        @learnerSubjectId int;
+    -- inspect what we have before the transaction
+    SELECT *
+    FROM LearnerSubjectMark
+    WHERE LearnerSubjectId =
+          (SELECT LearnerSubjectId FROM LearnerSubject WHERE SubjectId = @subjectId AND LearnerId = @learnerId);
+
     BEGIN TRANSACTION updateMarks;
     BEGIN TRY
         -- WE WANT TO UPDATE BOTH THE SUBJECT MARK, GRADE AND THEN ALSO UPDATE THE LEARNER SUBJECT MARK
         -- UPDATE THE PERCENTAGE FOR THE LEARNER
-        SET @learnerSubjectId =
-                (SELECT LearnerSubjectId FROM LearnerSubject WHERE LearnerId = @learnerId AND SubjectId = @subjectId);
+        DECLARE
+            @learnerSubjectId int = (SELECT LearnerSubjectId
+                                     FROM LearnerSubject
+                                     WHERE LearnerId = @learnerId
+                                       AND SubjectId = @subjectId);
         DECLARE
             @prevMark INT = (SELECT Percentage
                              FROM LearnerSubjectMark
@@ -37,7 +44,11 @@ BEGIN
         IF (@prevMark >= 50 AND @percentage < 50) OR (@prevMark < 50 AND @percentage >= 50)
             BEGIN
                 DECLARE
-                    @numLearners int = (SELECT COUNT(*) FROM LearnerSubject WHERE SubjectId = @subjectId);
+                    @numLearners int = (SELECT COUNT(*)
+                                        FROM LearnerSubjectMark
+                                        WHERE LearnerSubjectId IN (SELECT LearnerSubjectId
+                                                                   from LearnerSubject
+                                                                   WHERE SubjectId = @subjectId));
                 DECLARE
                     @numLearnersPassed int = (SELECT COUNT(*)
                                               FROM LearnerSubjectMark
@@ -45,14 +56,27 @@ BEGIN
                                                     (SELECT LearnerSubjectId
                                                      FROM LearnerSubject
                                                      WHERE SubjectId = @subjectId)
-                                                AND Percentage >= 49);
+                                                AND Percentage >= 50);
+                -- now we update the subject pass rate
                 UPDATE Subject SET PassPercentage = ((@numLearnersPassed / @numLearners)) WHERE SubjectId = @subjectId
             END
-        -- now we update the subject pass rate
+        -- inspect the changes resulting from above changes
+        SELECT *
+        FROM LearnerSubjectMark
+        WHERE LearnerSubjectId =
+              (SELECT LearnerSubjectId FROM LearnerSubject WHERE SubjectId = @subjectId AND LearnerId = @learnerId);
+
         COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
         ROLLBACK
     end catch
+
+    -- inspect what we have now after the transaction
+    SELECT *
+    FROM LearnerSubjectMark
+    WHERE LearnerSubjectId =
+          (SELECT LearnerSubjectId FROM LearnerSubject WHERE SubjectId = @subjectId AND LearnerId = @learnerId);
+
 end
 GO
