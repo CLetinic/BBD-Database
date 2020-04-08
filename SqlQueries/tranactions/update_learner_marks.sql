@@ -8,8 +8,12 @@ GO
 -- Author:		<Meluleki Dube>
 -- Create date: <2020-04-08>
 -- Description:	<Updates marks of a particular learner for a particular subject on a particular year term with a particular percentage>
--- Example: EXEC
+-- Example: EXEC updateUserGrade 2, 7, 1, 50;
 -- =============================================
+IF OBJECT_ID ( 'updateUserGrade', 'P' ) IS NOT NULL
+    DROP PROCEDURE updateUserGrade;
+GO
+
 CREATE PROCEDURE dbo.[updateUserGrade] @learnerId int,
                                        @subjectId int,
                                        @yearTermId int,
