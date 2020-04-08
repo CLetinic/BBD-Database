@@ -69,6 +69,7 @@ BEGIN
         COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
+        EXECUTE usp_GetErrorInfo;
         ROLLBACK
     end catch
 
