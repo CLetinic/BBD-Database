@@ -77,9 +77,7 @@ BEGIN
 		  [EntityTypeId] int,
 		  [ParentEntityId] int,
 		  PRIMARY KEY ([EntityId]),
-		  FOREIGN KEY ([ParentEntityId]) REFERENCES Entity([EntityId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([ParentEntityId]) REFERENCES Entity([EntityId]),
 		  FOREIGN KEY ([EntityTypeId]) REFERENCES EntityType([EntityTypeId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -91,9 +89,7 @@ BEGIN
 		  [MinGradeId] int,
 		  [MaxGradeId] int,
 		  PRIMARY KEY ([SchoolTypeId]),
-		  FOREIGN KEY ([MinGradeId]) REFERENCES Grade([GradeId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([MinGradeId]) REFERENCES Grade([GradeId]),
 		  FOREIGN KEY ([MaxGradeId]) REFERENCES Grade([GradeId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -104,9 +100,7 @@ BEGIN
 		  [EntityId] int,
 		  [SchoolTypeId] int,
 		  PRIMARY KEY ([SchoolId]),
-		  FOREIGN KEY ([EntityId]) REFERENCES Entity([EntityId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([EntityId]) REFERENCES Entity([EntityId]),
 		  FOREIGN KEY ([SchoolTypeId]) REFERENCES [SchoolType]([SchoolTypeId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -145,9 +139,7 @@ BEGIN
 		  [EffectiveFrom] date,
 		  [EffectiveTo] date,
 		  PRIMARY KEY ([LearnerSchoolId]),
-		  FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId]),
 		  FOREIGN KEY ([SchoolId]) REFERENCES School([SchoolId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -161,9 +153,7 @@ BEGIN
 		  [EffectiveFrom] date,
 		  [EffectiveTo] date,
 		  PRIMARY KEY ([EducatorSchoolId]),
-		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
 		  FOREIGN KEY ([SchoolId]) REFERENCES School([SchoolId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -176,9 +166,7 @@ BEGIN
 		  [ReasonId] int,
 		  [Date] date,
 		  PRIMARY KEY ([EducatorAbsentId]),
-		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
 		  FOREIGN KEY ([ReasonId]) REFERENCES Reason([ReasonId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -191,9 +179,7 @@ BEGIN
 		  [EffectiveFrom] date,
 		  [EffectiveTo] date,
 		  PRIMARY KEY ([EducatorSubjectId]),
-		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([EducatorId]) REFERENCES Educator([EducatorId]),
 		  FOREIGN KEY ([SubjectId]) REFERENCES [Subject]([SubjectId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -206,9 +192,7 @@ BEGIN
 		  [EffectiveFrom] date,
 		  [EffectiveTo] date,
 		  PRIMARY KEY ([LearnerSubjectId]),
-		  FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([LearnerId]) REFERENCES Learner([LearnerId]),
 		  FOREIGN KEY ([SubjectId]) REFERENCES [Subject]([SubjectId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
@@ -230,9 +214,7 @@ BEGIN
 		  [YearTermId] int,
 		  [Percentage] decimal(8,2),
 		  PRIMARY KEY ([LearnerSubjectMarkId]),
-		  FOREIGN KEY ([LearnerSubjectId]) REFERENCES LearnerSubject([LearnerSubjectId])
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE,
+		  FOREIGN KEY ([LearnerSubjectId]) REFERENCES LearnerSubject([LearnerSubjectId]),
 		  FOREIGN KEY ([YearTermId]) REFERENCES YearTerm([YearTermId])
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE
