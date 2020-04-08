@@ -55,7 +55,11 @@ CREATE TABLE [Entity] (
 CREATE TABLE [SchoolType] (
   [SchoolTypeId] int NOT NULL IDENTITY,
   [Description] varchar(55),
-  PRIMARY KEY ([SchoolTypeId])
+  [MinGradeId] int,
+  [MaxGradeId] int,
+  PRIMARY KEY ([SchoolTypeId]),
+  FOREIGN KEY ([MinGradeId]) REFERENCES Grade([GradeId]),
+  FOREIGN KEY ([MaxGradeId]) REFERENCES Grade([GradeId])
 );
 
 CREATE TABLE [School] (

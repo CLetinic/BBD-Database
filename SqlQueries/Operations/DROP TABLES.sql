@@ -13,9 +13,10 @@ DROP TABLE LearnerSubject;
 DROP TABLE Learner;
 DROP TABLE Gender;
 DROP TABLE [Subject];
-DROP TABLE Grade;
 DROP TABLE YearTerm;
 DROP TABLE SchoolType;
+DROP TABLE Grade;
+
 
 
 
