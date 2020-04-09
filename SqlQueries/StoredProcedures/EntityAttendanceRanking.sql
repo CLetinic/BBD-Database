@@ -7,9 +7,9 @@ GO
 -- Create date: 2020-04-08
 -- Description:	Get the schools who do not have educators registered 
 --              for all subjects
--- Use (Ex) : EXEC EntityAttendanceRanking '2018-01-01', '2018-08-31', 2
+-- Use (Ex) : EXEC EntityLearnerAttendanceRanking '2018-01-01', '2018-08-31', 2
 -- ====================================================================
-CREATE PROCEDURE EntityAttendanceRanking
+CREATE PROCEDURE EntityLearnerAttendanceRanking
 (
 	@StartDate date,
 	@EndDate date,

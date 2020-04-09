@@ -35,7 +35,7 @@ BEGIN
 	INSERT INTO LearnerSchool(LearnerId, SchoolId, EffectiveFrom, EffectiveTo)
 	VALUES (@LearnerId,@SchoolId,@EffectiveFrom,'9999-12-31')
 
-	IF(@GradeId<7)
+	IF(@GradeId<10)
 	BEGIN
 		INSERT INTO LearnerSubject(LearnerId, SubjectId, EffectiveFrom, EffectiveTo)
 		--VALUES (@LearnerId,@SchoolId,GETDATE(),'9999-12-31')
